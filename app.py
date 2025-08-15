@@ -15,8 +15,27 @@ app = FastAPI(
 with open("rf_model.pkl", "rb") as f:
     rf = pickle.load(f)
 
+# Load feature names used in the model
+X_columns = joblib.load("X_columns.pkl")
+
 
 @app.post("/classify", response_model=PredictionResponse)
 def classify(mushroom: MushroomFeatures):
-    print(mushroom)
-    return {"prediction": "HAHA I am a joke, I don't know how to classify mushrooms!"}
+    # Convert Pydantic model to DataFrame
+    df = pd.DataFrame([mushroom.dict()])
+
+    # One-hot encode
+    df_encoded = pd.get_dummies(df, drop_first=False)
+
+    # Align columns with training
+    df_encoded = df_encoded.reindex(columns=X_columns, fill_value=0)
+
+    # Predict
+    pred = rf.predict(df_encoded)[0]
+
+    if pred == "e":
+        pred = "edible"
+    else:
+        pred = "poisonous"
+
+    return {"prediction": pred}
