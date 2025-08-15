@@ -8,7 +8,7 @@ from schema import MushroomFeatures, PredictionResponse
 
 app = FastAPI(
     title="Mushroom Classifier API",
-    description="Classify mushrooms as edible ('e') or poisonous ('p') based on their features.",
+    description="Classify mushrooms as edible or poisonous based on their features.",
 )
 
 # Load trained model
@@ -32,10 +32,9 @@ def classify(mushroom: MushroomFeatures):
 
     # Predict
     pred = rf.predict(df_encoded)[0]
-
     if pred == "e":
-        pred = "edible"
+        pred = "Edible"
     else:
-        pred = "poisonous"
+        pred = "Poisonous"
 
     return {"prediction": pred}
