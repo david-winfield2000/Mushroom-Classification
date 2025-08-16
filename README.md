@@ -23,6 +23,7 @@ This project predicts whether a mushroom is edible or poisonous based on its phy
 
     - A decision tree is trained first to identify which features matter most.
     - A random forest is trained for better accuracy and validated using 5-fold cross-validation.
+    - K-Nearest Neighbors (KNN) experiments: KNN was also tested as a baseline classifier. Categorical features were label-encoded, and various values of `k` were evaluated using both train/test splits and cross-validation. While KNN achieved high accuracy, it was generally outperformed by the random forest model in terms of robustness and overall performance.
 
 3. **Deployment**
     - The trained model and feature list are saved with pickle and joblib.
