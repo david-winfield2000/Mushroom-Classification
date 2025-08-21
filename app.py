@@ -22,7 +22,7 @@ X_columns = joblib.load("X_columns.pkl")
 @app.post("/classify", response_model=PredictionResponse)
 def classify(mushroom: MushroomFeatures):
     # Convert Pydantic model to DataFrame
-    df = pd.DataFrame([mushroom.dict()])
+    df = pd.DataFrame([mushroom.model_dump()])
 
     # One-hot encode
     df_encoded = pd.get_dummies(df, drop_first=False)
