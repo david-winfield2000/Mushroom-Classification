@@ -2,7 +2,7 @@ import requests
 
 url = "http://127.0.0.1:8000/classify"
 
-# Test case 1: Likely edible
+# Test case 1: Likely poisonous
 edible_mushroom = {
     "cap_shape": "x",  # convex
     "cap_surface": "s",  # smooth
@@ -54,19 +54,20 @@ poisonous_mushroom = {
     "habitat": "g",  # grasses
 }
 
-# Test case 3: Likely edible
-edible_mushroom2 = {
+
+# Test case 4: Example from provided CSV (excluding 'class')
+edible_mushroom = {
     "cap_shape": "x",  # convex
-    "cap_surface": "y",  # scaly
-    "cap_color": "g",  # gray
-    "bruises": "f",  # no
+    "cap_surface": "s",  # smooth
+    "cap_color": "y",  # yellow
+    "bruises": "t",  # bruises
     "odor": "a",  # almond
     "gill_attachment": "f",  # free
     "gill_spacing": "c",  # close
     "gill_size": "b",  # broad
     "gill_color": "k",  # black
     "stalk_shape": "e",  # enlarging
-    "stalk_root": "b",  # bulbous
+    "stalk_root": "c",  # club
     "stalk_surface_above_ring": "s",  # smooth
     "stalk_surface_below_ring": "s",  # smooth
     "stalk_color_above_ring": "w",  # white
@@ -76,10 +77,10 @@ edible_mushroom2 = {
     "ring_number": "o",  # one
     "ring_type": "p",  # pendant
     "spore_print_color": "n",  # brown
-    "population": "s",  # scattered
-    "habitat": "d",  # woods
+    "population": "n",  # numerous
+    "habitat": "g",  # grasses
 }
 
-for mushroom in [edible_mushroom, poisonous_mushroom, edible_mushroom2]:
+for mushroom in [edible_mushroom, poisonous_mushroom, edible_mushroom]:
     resp = requests.post(url, json=mushroom)
     print(resp.json())
