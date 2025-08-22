@@ -2,7 +2,7 @@ import requests
 
 url = "http://127.0.0.1:8000/classify"
 
-# Test case 1: Likely poisonous
+# Test case 1: Likely edible
 edible_mushroom = {
     "cap_shape": "x",  # convex
     "cap_surface": "s",  # smooth
@@ -55,7 +55,7 @@ poisonous_mushroom = {
 }
 
 
-# Test case 4: Example from provided CSV (excluding 'class')
+# Test case 3 - Edible mushroom
 edible_mushroom = {
     "cap_shape": "x",  # convex
     "cap_surface": "s",  # smooth
